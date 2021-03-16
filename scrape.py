@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 # Main processing routine.
 #---------------------------------------------------------------------------------------
 
-outFile = "C:/Users/Flerlage/Cloud Drive/Documents/Ken/Blog/Famous Deaths/data.csv"
+outFile = "<Output File Name Here>"
 out = codecs.open(outFile, 'w', 'utf-8')
 out.write ('Name,URL,Occupation,Occupation Detail,Birth,Death')
 out.write('\n')
@@ -61,6 +61,7 @@ for pageLetter1 in range(493, 518):
                 occName = occName.replace('align="center" valign="middle"><font size="-1">', '')
                 occName = occName.replace('</font></td>', '')
 
+                # Next string will be Detailed Occupation
                 recordType = "Detailed"
                     
             elif recordType == "Detailed":
@@ -69,6 +70,7 @@ for pageLetter1 in range(493, 518):
                 detailedName = detailedName.replace('align="center" valign="middle"><font size="-1">', '')
                 detailedName = detailedName.replace('</font></td>', '')
 
+                # Next string will be Birth
                 recordType = "Birth"
                     
             elif recordType == "Birth":
@@ -77,6 +79,7 @@ for pageLetter1 in range(493, 518):
                 birthDate = birthDate.replace('align="center" nowrap="" valign="middle"><tt>', '')
                 birthDate = birthDate.replace('</tt></td>', '')
 
+                # Next string will be Death
                 recordType = "Death"
                     
             elif recordType == "Death":
@@ -86,6 +89,7 @@ for pageLetter1 in range(493, 518):
                 deathDate = deathDate.replace('</tt></td>', '')
                 deathDate = deathDate.replace('</tr><tr>', '')
                 pos = deathDate.find('</tr>')
+                
                 if pos > 0:
                     deathDate = deathDate[0:pos-1]
 
@@ -94,8 +98,7 @@ for pageLetter1 in range(493, 518):
                 recordString = recordString.replace("<i>","")
                 recordString = recordString.replace("</i>","")
                 recordCount +=1
-                if recordCount==913:
-                    print(recordString)
+                
                 print("Writing record # " + str(recordCount))
                 out.write (recordString)
                 out.write('\n')
